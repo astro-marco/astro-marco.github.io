@@ -3,61 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marco's Website</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <title>IgeA - Personal Medical Data Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <meta name="description" content="IgeA - Intelligent software for managing, aggregating and analyzing personal medical data">
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">Marco</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="logo">
+                    <a href="/">
+                        <img src="img/igea-logo.svg" alt="IgeA Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#use-cases">Use Cases</a>
+                    <a href="#security">Security</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#download" class="download-btn">Download</a>
+                </div>
+                <div class="mobile-menu-btn">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
         </nav>
     </header>
 
     <main>
-        <section id="hero">
-            <div class="container">
-                <h1>Welcome to My Digital Space</h1>
-                <p class="subtitle">Developer, creator, thinker</p>
-                <div class="cta-buttons">
-                    <a href="#projects" class="btn primary">View My Work</a>
-                    <a href="#contact" class="btn secondary">Get in Touch</a>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Your Medical Data, Intelligently Organized</h1>
+                    <p>IgeA helps you aggregate, visualize, and make sense of your personal health information - taking control of your medical journey has never been easier.</p>
+                    <div class="hero-cta">
+                        <a href="#download" class="primary-btn">Get Started</a>
+                        <a href="#demo" class="secondary-btn">See Demo</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="img/hero-dashboard.png" alt="IgeA Dashboard Interface">
                 </div>
             </div>
         </section>
 
-        <section id="about" class="dark-section">
-            <div class="container">
-                <h2>About Me</h2>
-                <p>A brief introduction about yourself and what you do.</p>
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="section-container">
+                <h2>Powerful Medical Data Management</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="img/icons/aggregate.svg" alt="Aggregation Icon">
+                        </div>
+                        <h3>Aggregation</h3>
+                        <p>Connect and import your medical data from multiple sources, providers, and devices into one unified platform.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="img/icons/visualize.svg" alt="Visualization Icon">
+                        </div>
+                        <h3>Visualization</h3>
+                        <p>Transform complex health data into intuitive graphs, charts and timelines for better understanding.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="img/icons/analyze.svg" alt="Analysis Icon">
+                        </div>
+                        <h3>Analysis</h3>
+                        <p>Identify trends, correlations, and patterns in your health data to make informed decisions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="img/icons/secure.svg" alt="Security Icon">
+                        </div>
+                        <h3>Privacy First</h3>
+                        <p>End-to-end encryption and local-first design keeps your sensitive health data secure and private.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="projects">
-            <div class="container">
-                <h2>Projects</h2>
-                <div class="project-grid">
-                    <!-- Project cards go here -->
-                    <div class="project-card">
-                        <h3>Project Title</h3>
-                        <p>Project description goes here</p>
+        <!-- Use Cases Section -->
+        <section id="use-cases" class="use-cases">
+            <div class="section-container">
+                <h2>Designed For Your Health Journey</h2>
+                <div class="use-cases-wrapper">
+                    <div class="use-case">
+                        <div class="use-case-content">
+                            <h3>Chronic Condition Management</h3>
+                            <p>Track symptoms, medications, and test results over time to better understand your condition and share insights with healthcare providers.</p>
+                            <ul>
+                                <li>Medication effectiveness tracking</li>
+                                <li>Symptom correlation analysis</li>
+                                <li>Treatment outcome visualization</li>
+                            </ul>
+                        </div>
+                        <div class="use-case-image">
+                            <img src="img/chronic-management.png" alt="Chronic Condition Dashboard">
+                        </div>
                     </div>
-                    <!-- Repeat for more projects -->
+                    
+                    <div class="use-case reversed">
+                        <div class="use-case-content">
+                            <h3>Preventive Healthcare</h3>
+                            <p>Monitor key health metrics, identify early warning signs, and take proactive steps to maintain your wellbeing.</p>
+                            <ul>
+                                <li>Health metric baseline establishment</li>
+                                <li>Preventive screening scheduler</li>
+                                <li>Lifestyle impact analysis</li>
+                            </ul>
+                        </div>
+                        <div class="use-case-image">
+                            <img src="img/preventive-health.png" alt="Preventive Healthcare Dashboard">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Section -->
+        <section id="security" class="security">
+            <div class="section-container">
+                <h2>Your Data Stays Private</h2>
+                <p class="section-intro">IgeA is designed with data privacy as the foundation - not an afterthought.</p>
+                
+                <div class="security-features">
+                    <div class="security-feature">
+                        <h3>Local-First Architecture</h3>
+                        <p>Your medical data remains on your device by default. You control what leaves your computer.</p>
+                    </div>
+                    <div class="security-feature">
+                        <h3>End-to-End Encryption</h3>
+                        <p>All data is encrypted using industry-standard protocols before any synchronization.</p>
+                    </div>
+                    <div class="security-feature">
+                        <h3>No Data Mining</h3>
+                        <p>We don't analyze, sell, or monetize your personal health information. Period.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="download">
+            <div class="section-container">
+                <h2>Start Managing Your Health Data</h2>
+                <p>Available for all major platforms</p>
+                
+                <div class="download-options">
+                    <a href="#" class="download-option">
+                        <img src="img/icons/windows.svg" alt="Windows">
+                        <span>Windows</span>
+                    </a>
+                    <a href="#" class="download-option">
+                        <img src="img/icons/macos.svg" alt="macOS">
+                        <span>macOS</span>
+                    </a>
+                    <a href="#" class="download-option">
+                        <img src="img/icons/linux.svg" alt="Linux">
+                        <span>Linux</span>
+                    </a>
+                    <a href="#" class="download-option">
+                        <img src="img/icons/ios.svg" alt="iOS">
+                        <span>iOS</span>
+                    </a>
+                    <a href="#" class="download-option">
+                        <img src="img/icons/android.svg" alt="Android">
+                        <span>Android</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq">
+            <div class="section-container">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>Is my medical data secure with IgeA?</h3>
+                        <p>Yes. IgeA uses local-first architecture with end-to-end encryption. Your data stays on your device by default and you maintain complete control over your information.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Which medical data sources can I connect to IgeA?</h3>
+                        <p>IgeA supports importing data from major electronic health record systems, popular health apps, wearable devices, and manual data entry for complete flexibility.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Can I share my health data with my doctor?</h3>
+                        <p>Yes. IgeA allows you to generate comprehensive reports that can be shared with healthcare providers through secure channels or exported as PDFs.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Do I need technical knowledge to use IgeA?</h3>
+                        <p>No. IgeA is designed to be user-friendly and intuitive. The interface guides you through setting up data sources and creating visualizations.</p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2023 Marco. All rights reserved.</p>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="img/igea-logo-white.svg" alt="IgeA Logo">
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <a href="#features">Features</a>
+                    <a href="#use-cases">Use Cases</a>
+                    <a href="#download">Download</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#faq">FAQ</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/documentation">Documentation</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <a href="/about">About</a>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="Twitter"><img src="img/icons/twitter.svg" alt="Twitter"></a>
+                <a href="#" aria-label="LinkedIn"><img src="img/icons/linkedin.svg" alt="LinkedIn"></a>
+                <a href="#" aria-label="GitHub"><img src="img/icons/github.svg" alt="GitHub"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 IgeA. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
