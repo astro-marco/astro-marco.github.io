@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
+    <style>
+    .text { font-family: 'Inter', sans-serif; font-weight: 700; }
+    .primary { fill: #3498db; }
+    .secondary { fill: #2ecc71; }
+    </style>
+    <path class="secondary" d="M15,8 C12.24,8 10,10.24 10,13 C10,15.76 12.24,18 15,18 C17.76,18 20,15.76 20,13 C20,10.24 17.76,8 15,8 Z" />
+    <path class="primary" d="M30,20 C25.58,20 22,23.58 22,28 C22,32.42 25.58,36 30,36 C34.42,36 38,32.42 38,28 C38,23.58 34.42,20 30,20 Z" />
+    <path class="primary" d="M15,20 L15,36" stroke="#3498db" stroke-width="4" stroke-linecap="round" />
+    <text x="45" y="28" class="text primary" font-size="24">IgeA</text>
+</svg>
