@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#3498db">
+    <!-- Shield outline - simplified -->
+    <path d="M256 80c-70 0-175-20-175-20v180c0 90 105 172 175 192 70-20 175-102 175-192V60s-105 20-175 20z" fill="none" stroke="#3498db" stroke-width="16"/>
+
+    <!-- Shield inner pattern - simplified -->
+    <path d="M256 110c-50 0-145-15-145-15v155c0 75 83 142 145 160 62-18 145-85 145-160V95s-95 15-145 15z" fill="none" stroke="#3498db" stroke-width="4" stroke-dasharray="12,8" opacity="0.7"/>
+
+    <!-- Lock body - proportionally smaller -->
+    <rect x="196" y="220" width="120" height="90" rx="14" ry="14" fill="#3498db"/>
+
+    <!-- Lock shackle - adjusted to maintain proportions -->
+    <path d="M215 220v-35c0-25 18-45 41-45s41 20 41 45v35" fill="none" stroke="#2980b9" stroke-width="16" stroke-linecap="round"/>
+    <path d="M215 220v-35c0-25 18-45 41-45s41 20 41 45v35" fill="none" stroke="#3498db" stroke-width="12" stroke-linecap="round"/>
+
+    <!-- Keyhole - adjusted for smaller lock -->
+    <circle cx="256" cy="255" r="13" fill="#ffffff"/>
+    <path d="M256 268v16" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Shield decoration - adjusted -->
+    <path d="M220 300h72" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+</svg>

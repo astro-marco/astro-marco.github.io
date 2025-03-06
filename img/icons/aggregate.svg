@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#3498db">
+    <!-- Central hub -->
+    <circle cx="256" cy="256" r="70" stroke="#3498db" stroke-width="12" fill="#eef7fd"/>
+    <circle cx="256" cy="256" r="40"/>
+
+    <!-- Data nodes and connections -->
+    <!-- Node 1 - Top -->
+    <circle cx="256" cy="100" r="25" fill="#2980b9"/>
+    <path d="M256 125L256 216" stroke="#3498db" stroke-width="10" stroke-dasharray="15,8" stroke-linecap="round"/>
+    <path d="M256 125L256 216" stroke="#3498db" stroke-width="20" stroke-linecap="round" stroke-opacity="0.3"/>
+
+    <!-- Node 2 - Right -->
+    <circle cx="400" cy="256" r="25" fill="#2980b9"/>
+    <path d="M375 256L296 256" stroke="#3498db" stroke-width="10" stroke-dasharray="15,8" stroke-linecap="round"/>
+    <path d="M375 256L296 256" stroke="#3498db" stroke-width="20" stroke-linecap="round" stroke-opacity="0.3"/>
+
+    <!-- Node 3 - Bottom -->
+    <circle cx="256" cy="410" r="25" fill="#2980b9"/>
+    <path d="M256 385L256 296" stroke="#3498db" stroke-width="10" stroke-dasharray="15,8" stroke-linecap="round"/>
+    <path d="M256 385L256 296" stroke="#3498db" stroke-width="20" stroke-linecap="round" stroke-opacity="0.3"/>
+
+    <!-- Node 4 - Left -->
+    <circle cx="110" cy="256" r="25" fill="#2980b9"/>
+    <path d="M135 256L216 256" stroke="#3498db" stroke-width="10" stroke-dasharray="15,8" stroke-linecap="round"/>
+    <path d="M135 256L216 256" stroke="#3498db" stroke-width="20" stroke-linecap="round" stroke-opacity="0.3"/>
+
+    <!-- Small data points -->
+    <circle cx="180" cy="180" r="15" fill="#3498db" opacity="0.8"/>
+    <circle cx="330" cy="180" r="15" fill="#3498db" opacity="0.8"/>
+    <circle cx="330" cy="330" r="15" fill="#3498db" opacity="0.8"/>
+    <circle cx="180" cy="330" r="15" fill="#3498db" opacity="0.8"/>
+
+    <!-- Data flow animation hint -->
+    <path d="M256 256 m-90 0 a90,90 0 1,0 180,0 a90,90 0 1,0 -180,0" fill="none" stroke="#3498db" stroke-width="3" stroke-dasharray="12,12" opacity="0.6"/>
+</svg>

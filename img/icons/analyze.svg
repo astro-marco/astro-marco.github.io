@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#3498db">
+    <!-- Background grid - simplified -->
+    <path d="M100 100h300M100 180h300M100 260h300M100 340h300M100 100v300M180 100v300M260 100v300M340 100v300" stroke="#3498db" stroke-width="2" stroke-opacity="0.2"/>
+
+    <!-- Magnifying glass lens - better proportions -->
+    <circle cx="200" cy="200" r="110" fill="none" stroke="#3498db" stroke-width="16"/>
+
+    <!-- Magnifying glass handle - better proportions -->
+    <path d="M284 284L380 380" stroke="#2980b9" stroke-width="32" stroke-linecap="round"/>
+    <path d="M284 284L380 380" stroke="#3498db" stroke-width="24" stroke-linecap="round"/>
+
+    <!-- Data visualization elements - simplified -->
+    <g>
+        <!-- Data points -->
+        <circle cx="150" cy="170" r="12" fill="#2980b9"/>
+        <circle cx="220" cy="150" r="12" fill="#2980b9"/>
+        <circle cx="250" cy="230" r="12" fill="#2980b9"/>
+        <circle cx="160" cy="250" r="12" fill="#2980b9"/>
+        <circle cx="190" cy="200" r="16" fill="#3498db"/>
+
+        <!-- Connection lines -->
+        <path d="M150 170L190 200M220 150L190 200M250 230L190 200M160 250L190 200" stroke="#3498db" stroke-width="4"/>
+
+        <!-- Trend line -->
+        <path d="M130 230L270 170" stroke="#2980b9" stroke-width="4" stroke-dasharray="10,6"/>
+    </g>
+</svg>

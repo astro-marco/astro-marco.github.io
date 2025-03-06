@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#3498db">
+    <!-- Background grid -->
+    <path d="M96 96h320M96 176h320M96 256h320M96 336h320M96 416h320M96 96v320M176 96v320M256 96v320M336 96v320M416 96v320" stroke="#3498db" stroke-width="2" stroke-opacity="0.2"/>
+
+    <!-- Chart frame -->
+    <rect x="96" y="96" width="320" height="320" rx="8" ry="8" fill="none" stroke="#3498db" stroke-width="12"/>
+
+    <!-- Bar chart elements with gradient -->
+    <linearGradient id="barGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#2980b9"/>
+        <stop offset="100%" stop-color="#3498db"/>
+    </linearGradient>
+
+    <rect x="120" y="300" width="30" height="100" rx="4" ry="4" fill="url(#barGradient)" opacity="0.9"/>
+    <rect x="180" y="220" width="30" height="180" rx="4" ry="4" fill="url(#barGradient)" opacity="0.9"/>
+    <rect x="240" y="260" width="30" height="140" rx="4" ry="4" fill="url(#barGradient)" opacity="0.9"/>
+    <rect x="300" y="180" width="30" height="220" rx="4" ry="4" fill="url(#barGradient)" opacity="0.9"/>
+    <rect x="360" y="240" width="30" height="160" rx="4" ry="4" fill="url(#barGradient)" opacity="0.9"/>
+
+    <!-- Line chart with smooth curve -->
+    <path d="M120 200 C140 160, 160 190, 180 180 S220 130, 240 160 S300 120, 320 130 S360 160, 380 140" fill="none" stroke="#2980b9" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Data points on line with glow effect -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="2" result="blur"/>
+        <feFlood flood-color="#3498db" flood-opacity="0.3" result="glow"/>
+        <feComposite in="glow" in2="blur" operator="in" result="coloredBlur"/>
+        <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+
+    <circle cx="120" cy="200" r="10" fill="#fff" stroke="#2980b9" stroke-width="4" filter="url(#glow)"/>
+    <circle cx="180" cy="180" r="10" fill="#fff" stroke="#2980b9" stroke-width="4" filter="url(#glow)"/>
+    <circle cx="240" cy="160" r="10" fill="#fff" stroke="#2980b9" stroke-width="4" filter="url(#glow)"/>
+    <circle cx="320" cy="130" r="10" fill="#fff" stroke="#2980b9" stroke-width="4" filter="url(#glow)"/>
+    <circle cx="380" cy="140" r="10" fill="#fff" stroke="#2980b9" stroke-width="4" filter="url(#glow)"/>
+</svg>
