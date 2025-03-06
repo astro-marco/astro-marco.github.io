@@ -1,6 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#3498db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="10"/>
-    <circle cx="12" cy="7" r="2"/>
-    <path d="M10 12h4"/>
-    <path d="M9 16l3-4 3 4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#3498db">
+    <!-- Background grid -->
+    <path d="M100 100h300M100 180h300M100 260h300M100 340h300M100 100v300M180 100v300M260 100v300M340 100v300" stroke="#3498db" stroke-width="2" stroke-opacity="0.2"/>
+
+    <!-- Main circular outline -->
+    <circle cx="256" cy="256" r="130" fill="none" stroke="#3498db" stroke-width="16"/>
+
+    <!-- Head -->
+    <circle cx="256" cy="180" r="36" fill="#2980b9"/>
+
+    <!-- Body -->
+    <path d="M256 216v50" stroke="#2980b9" stroke-width="24" stroke-linecap="round"/>
+
+    <!-- Arms -->
+    <path d="M205 245h102" stroke="#2980b9" stroke-width="24" stroke-linecap="round"/>
+
+    <!-- Legs - separated into two distinct lines to avoid triangle -->
+    <path d="M256 266l-50 84" stroke="#2980b9" stroke-width="24" stroke-linecap="round"/>
+    <path d="M256 266l50 84" stroke="#2980b9" stroke-width="24" stroke-linecap="round"/>
 </svg>
