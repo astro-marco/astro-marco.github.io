@@ -1,6 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#3498db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 2a4 4 0 0 1 4 4v2h1a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4z"/>
-    <circle cx="9" cy="12" r="1"/>
-    <circle cx="15" cy="12" r="1"/>
-    <path d="M8 16s1.5 1 4 1 4-1 4-1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#3498db">
+    <!-- Background grid -->
+    <path d="M100 100h300M100 180h300M100 260h300M100 340h300M100 100v300M180 100v300M260 100v300M340 100v300" stroke="#3498db" stroke-width="2" stroke-opacity="0.2"/>
+
+    <!-- Robot head - enlarged to match other icons -->
+    <rect x="156" y="156" width="200" height="200" rx="25" ry="25" fill="none" stroke="#3498db" stroke-width="16"/>
+
+    <!-- Robot antenna -->
+    <path d="M256 156v-50M226 106h60" stroke="#3498db" stroke-width="16" stroke-linecap="round"/>
+
+    <!-- Robot eyes - enlarged -->
+    <circle cx="206" cy="216" r="25" fill="#2980b9"/>
+    <circle cx="306" cy="216" r="25" fill="#2980b9"/>
+
+    <!-- Robot mouth/speaker - enlarged -->
+    <rect x="196" y="296" width="120" height="24" rx="8" ry="8" fill="#2980b9"/>
+
+    <!-- Robot ear/lights - repositioned -->
+    <rect x="136" y="206" width="12" height="50" rx="6" ry="6" fill="#2980b9"/>
+    <rect x="364" y="206" width="12" height="50" rx="6" ry="6" fill="#2980b9"/>
 </svg>
