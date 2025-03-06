@@ -37,7 +37,7 @@
             <div class="hero-container">
                 <div class="hero-content">
                     <h1>Your Medical Data, Intelligently Organized</h1>
-                    <p>IgeA helps you aggregate, visualize, and make sense of your personal health information - taking control of your medical journey has never been easier.</p>
+                    <p>IgeA helps you aggregate, visualize, and make sense of your personal health information with powerful AI assistance - taking control of your medical journey has never been easier.</p>
                     <div class="hero-cta">
                         <a href="#download" class="primary-btn">Get Started</a>
                         <a href="#demo" class="secondary-btn">See Demo</a>
@@ -82,6 +82,27 @@
                         <h3>Privacy First</h3>
                         <p>End-to-end encryption and local-first design keeps your sensitive health data secure and private.</p>
                     </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="img/icons/ai.svg" alt="AI Integration Icon">
+                        </div>
+                        <h3>AI Powered</h3>
+                        <p>Advanced artificial intelligence enhances every aspect of the platform, making complex health data management simple and accessible for everyone.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="img/icons/document.svg" alt="Document Processing Icon">
+                        </div>
+                        <h3>Smart Document Processing</h3>
+                        <p>Automatically extract and organize data from medical reports, prescriptions, and test results by simply uploading a photo of your documents.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <img src="img/icons/accessibility.svg" alt="Accessibility Icon">
+                        </div>
+                        <h3>Enhanced Accessibility</h3>
+                        <p>AI-powered voice commands, simplified interfaces, and intelligent assistance make managing health data accessible for users of all technical abilities.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -118,6 +139,21 @@
                         </div>
                         <div class="use-case-image">
                             <img src="img/preventive-health.png" alt="Preventive Healthcare Dashboard">
+                        </div>
+                    </div>
+                    <div class="use-case">
+                        <div class="use-case-content">
+                            <h3>Effortless Medical Document Management</h3>
+                            <p>Let AI do the heavy lifting of organizing and analyzing your medical documents, making healthcare management accessible for everyone, including seniors.</p>
+                            <ul>
+                                <li>Automatic data extraction from medical reports</li>
+                                <li>Smart categorization of test results and images</li>
+                                <li>Natural language summaries of complex medical information</li>
+                                <li>Voice-guided interface for enhanced accessibility</li>
+                            </ul>
+                        </div>
+                        <div class="use-case-image">
+                            <img src="img/document-processing.png" alt="AI Document Processing">
                         </div>
                     </div>
                 </div>
@@ -183,22 +219,68 @@
             <div class="section-container">
                 <h2>Frequently Asked Questions</h2>
                 
+                <!-- New FAQ Categories -->
+                <div class="faq-categories">
+                    <button class="faq-category-btn active" data-category="all">All</button>
+                    <button class="faq-category-btn" data-category="general">General</button>
+                    <button class="faq-category-btn" data-category="security">Security</button>
+                    <button class="faq-category-btn" data-category="features">Features</button>
+                    <button class="faq-category-btn" data-category="accessibility">Accessibility</button>
+                </div>
+                
                 <div class="faq-grid">
-                    <div class="faq-item">
-                        <h3>Is my medical data secure with IgeA?</h3>
-                        <p>Yes. IgeA uses local-first architecture with end-to-end encryption. Your data stays on your device by default and you maintain complete control over your information.</p>
+                    <div class="faq-item" data-category="security">
+                        <button class="faq-question" aria-expanded="false">
+                            Is my medical data secure with IgeA?
+                        </button>
+                        <div class="faq-content">
+                            <p>Yes. IgeA uses local-first architecture with end-to-end encryption. Your data stays on your device by default and you maintain complete control over your information.</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <h3>Which medical data sources can I connect to IgeA?</h3>
-                        <p>IgeA supports importing data from major electronic health record systems, popular health apps, wearable devices, and manual data entry for complete flexibility.</p>
+                    
+                    <div class="faq-item" data-category="features">
+                        <button class="faq-question" aria-expanded="false">
+                            Which medical data sources can I connect to IgeA?
+                        </button>
+                        <div class="faq-content">
+                            <p>IgeA supports importing data from major electronic health record systems, popular health apps, wearable devices, and manual data entry for complete flexibility.</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <h3>Can I share my health data with my doctor?</h3>
-                        <p>Yes. IgeA allows you to generate comprehensive reports that can be shared with healthcare providers through secure channels or exported as PDFs.</p>
+                    
+                    <div class="faq-item" data-category="features">
+                        <button class="faq-question" aria-expanded="false">
+                            Can I share my health data with my doctor?
+                        </button>
+                        <div class="faq-content">
+                            <p>Yes. IgeA allows you to generate comprehensive reports that can be shared with healthcare providers through secure channels or exported as PDFs.</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <h3>Do I need technical knowledge to use IgeA?</h3>
-                        <p>No. IgeA is designed to be user-friendly and intuitive. The interface guides you through setting up data sources and creating visualizations.</p>
+                    
+                    <div class="faq-item" data-category="general">
+                        <button class="faq-question" aria-expanded="false">
+                            Do I need technical knowledge to use IgeA?
+                        </button>
+                        <div class="faq-content">
+                            <p>No. IgeA is designed to be user-friendly and intuitive. The interface guides you through setting up data sources and creating visualizations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="features">
+                        <button class="faq-question" aria-expanded="false">
+                            How does the AI document processing work?
+                        </button>
+                        <div class="faq-content">
+                            <p>Simply take a photo of your medical document or upload an existing image. Our AI will automatically extract relevant information like test results, diagnoses, medication details, and even process medical images, organizing everything into your health profile.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="accessibility">
+                        <button class="faq-question" aria-expanded="false">
+                            Is IgeA suitable for elderly users?
+                        </button>
+                        <div class="faq-content">
+                            <p>Absolutely! IgeA was designed with accessibility as a priority. The AI-powered interface offers voice commands, simplified navigation, larger text options, and can even read information aloud, making it ideal for elderly users or those with limited technical experience.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -206,7 +288,7 @@
     </main>
 
     <footer>
-        <div class="footer-container">
+        <div class="footer-container"></div>
             <div class="footer-logo">
                 <img src="img/igea-logo-white.svg" alt="IgeA Logo">
             </div>

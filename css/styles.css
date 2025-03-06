@@ -376,6 +376,29 @@ p {
     background-color: var(--light);
 }
 
+.faq-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.faq-category-btn {
+    padding: 8px 16px;
+    background-color: var(--white);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-md);
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faq-category-btn.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
 .faq-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -384,43 +407,53 @@ p {
 
 .faq-item {
     background-color: var(--white);
-    padding: 24px;
+    padding: 0;
     border-radius: var(--radius-md);
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    cursor: pointer;
     transition: all 0.3s ease;
+    overflow: hidden;
 }
 
-.faq-item h3 {
+.faq-question {
     color: var(--primary-color);
     font-size: 1.3rem;
-    margin-bottom: 12px;
+    padding: 24px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    outline: none;
+    font-weight: 700;
+}
+
+.faq-question::after {
+    content: '+';
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.expanded .faq-question::after {
+    transform: rotate(45deg);
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 24px;
+}
+
+.faq-item.expanded .faq-content {
+    padding-bottom: 24px;
 }
 
 .faq-item.expanded {
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-.faq-item h3::after {
-    content: '+';
-    float: right;
-    transition: transform 0.3s ease;
-}
-
-.faq-item.expanded h3::after {
-    transform: rotate(45deg);
-}
-
-.faq-item p {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, margin 0.3s ease;
-    margin-bottom: 0;
-}
-
-.faq-item.expanded p {
-    max-height: 500px;
-    margin-bottom: 20px;
 }
 
 /* Footer */
@@ -582,6 +615,11 @@ footer {
     
     .faq-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .faq-category-btn {
+        padding: 6px 12px;
+        font-size: 0.9rem;
     }
     
     .footer-links {

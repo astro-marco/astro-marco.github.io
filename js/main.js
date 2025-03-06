@@ -80,37 +80,80 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add scroll event for nav highlighting
     window.addEventListener('scroll', highlightNavItem);
     
-    // FAQ accordion functionality
+    // FAQ accordion functionality - improved version
     const faqItems = document.querySelectorAll('.faq-item');
     
     faqItems.forEach(item => {
-        const question = item.querySelector('h3');
+        const question = item.querySelector('.faq-question');
+        const content = item.querySelector('.faq-content');
         
         if (question) {
+            // Set initial state
+            content.style.maxHeight = '0px';
+            question.setAttribute('aria-expanded', 'false');
+            
             question.addEventListener('click', () => {
-                // Toggle current item
-                item.classList.toggle('expanded');
+                // Check if current item is expanded
+                const isExpanded = question.getAttribute('aria-expanded') === 'true';
                 
-                // Update aria attributes for accessibility
-                const isExpanded = item.classList.contains('expanded');
-                question.setAttribute('aria-expanded', isExpanded);
+                // First collapse all items
+                faqItems.forEach(otherItem => {
+                    const otherQuestion = otherItem.querySelector('.faq-question');
+                    const otherContent = otherItem.querySelector('.faq-content');
+                    
+                    if (otherQuestion && otherContent) {
+                        otherItem.classList.remove('expanded');
+                        otherQuestion.setAttribute('aria-expanded', 'false');
+                        otherContent.style.maxHeight = '0px';
+                    }
+                });
                 
-                // Optional: close other items
-                if (isExpanded) {
-                    faqItems.forEach(otherItem => {
-                        if (otherItem !== item && otherItem.classList.contains('expanded')) {
-                            otherItem.classList.remove('expanded');
-                            otherItem.querySelector('h3').setAttribute('aria-expanded', 'false');
-                        }
-                    });
+                // Then expand current item if it wasn't expanded before
+                if (!isExpanded) {
+                    item.classList.add('expanded');
+                    question.setAttribute('aria-expanded', 'true');
+                    content.style.maxHeight = content.scrollHeight + 'px';
                 }
             });
-            
-            // Initialize aria attributes
-            question.setAttribute('aria-expanded', 'false');
-            question.style.cursor = 'pointer';
         }
     });
+    
+    // FAQ category filtering
+    const faqCategoryBtns = document.querySelectorAll('.faq-category-btn');
+    const allFaqItems = document.querySelectorAll('.faq-item');
+    
+    if (faqCategoryBtns.length > 0) {
+        faqCategoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                faqCategoryBtns.forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const category = btn.dataset.category;
+                
+                // Show/hide FAQ items based on category
+                allFaqItems.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                        
+                        // Collapse if expanded
+                        if (item.classList.contains('expanded')) {
+                            const question = item.querySelector('.faq-question');
+                            const content = item.querySelector('.faq-content');
+                            
+                            item.classList.remove('expanded');
+                            question.setAttribute('aria-expanded', 'false');
+                            content.style.maxHeight = '0px';
+                        }
+                    }
+                });
+            });
+        });
+    }
     
     // Add animation on scroll for elements
     const elementsToAnimate = document.querySelectorAll('.feature-card, .use-case, .security-feature');
