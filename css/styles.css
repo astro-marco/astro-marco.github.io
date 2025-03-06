@@ -383,7 +383,7 @@ p {
     gap: 10px;
     margin-bottom: 30px;
     position: relative;
-    z-index: 2; /* Assicura che i pulsanti siano sempre cliccabili */
+    z-index: 10; /* Aumentato per garantire che sia sopra ogni altro elemento */
 }
 
 .faq-category-btn {
@@ -401,31 +401,32 @@ p {
     color: var(--white);
 }
 
-/* Modifico la griglia per avere sempre una colonna singola */
 .faq-grid {
     display: flex;
     flex-direction: column;
     gap: 24px;
     max-width: 800px;
     margin: 0 auto;
-    transition: height 0.3s ease; /* Aggiunge transizione fluida all'altezza */
-    position: relative; /* Importante per lo positioning dei figli */
+    transition: height 0.3s ease-in-out;
+    position: relative;
+    min-height: 100px;
+    will-change: height; /* Prepara il browser per cambiamenti nell'altezza */
+    overflow: visible; /* Consentiamo ai figli di essere visibili anche se overflow */
 }
 
 .faq-item {
     background-color: var(--white);
-    padding: 0;
     border-radius: var(--radius-md);
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: all 0.3s ease, transform 0s; /* Evita transizioni sulla trasformazione */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    will-change: transform, opacity, max-height;
     overflow: hidden;
-    height: auto;
-    contain: content;
     display: flex;
     flex-direction: column;
     width: 100%;
     transform: translateZ(0); /* Attiva hardware acceleration */
-    will-change: transform, opacity; /* Avvisa il browser di possibili cambiamenti */
+    backface-visibility: hidden; /* Migliora prestazioni rendering */
+    perspective: 1000px; /* Migliora prestazioni rendering */
 }
 
 .faq-question {
@@ -458,7 +459,7 @@ p {
 .faq-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s ease;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
     padding: 0 24px;
     flex-grow: 1;
 }

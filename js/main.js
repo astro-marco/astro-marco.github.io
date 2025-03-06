@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // FAQ category filtering - migliorato per eliminare il "saltello" durante il cambio categoria
+    // FAQ category filtering - completamente riscritto per eliminare il glitch visivo
     const faqCategoryBtns = document.querySelectorAll('.faq-category-btn');
     const allFaqItems = document.querySelectorAll('.faq-item');
     const faqGrid = document.querySelector('.faq-grid');
@@ -156,56 +156,79 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
+        // Inizializza visibilità iniziale delle FAQ
+        allFaqItems.forEach(item => {
+            item.style.opacity = '1';
+            item.style.position = 'relative';
+            item.style.transition = 'opacity 0.3s ease-in-out';
+        });
+
         faqCategoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Salva la posizione di scorrimento corrente e l'altezza del contenitore
-                const scrollPosition = window.scrollY;
-                const faqSectionHeight = faqGrid.offsetHeight;
-                
-                // Salva la posizione di scroll rispetto alla parte superiore della griglia FAQ
-                const faqGridTop = faqGrid.getBoundingClientRect().top + window.scrollY;
-                const scrollRelativeToFaq = scrollPosition - faqGridTop;
-                
-                // Temporaneamente mantieni l'altezza fissa per prevenire il salto
-                faqGrid.style.height = `${faqSectionHeight}px`;
-                
-                // Remove active class from all buttons
-                faqCategoryBtns.forEach(b => b.classList.remove('active'));
-                
-                // Add active class to clicked button
-                btn.classList.add('active');
-                
                 const category = btn.dataset.category;
                 
-                // Ripristina tutte le FAQ e nascondi tutte
+                // 1. Prepariamo la transizione bloccando l'altezza attuale
+                const currentHeight = faqGrid.offsetHeight;
+                faqGrid.style.height = `${currentHeight}px`;
+                
+                // 2. Aggiorniamo l'attivazione del pulsante
+                faqCategoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // 3. Fase 1: Fade out - rendiamo invisibili tutte le FAQ
+                const fadeOutPromises = [];
+                
                 allFaqItems.forEach(item => {
                     resetFaqItem(item);
-                    item.style.display = 'none';
-                });
-                
-                // Show relevant FAQ items
-                let visibleItems = [];
-                allFaqItems.forEach(item => {
-                    if (category === 'all' || item.dataset.category === category) {
-                        item.style.display = 'block';
-                        visibleItems.push(item);
-                    }
-                });
-                
-                // Dopo un breve istante, rimuovi l'altezza fissa
-                // e lascia che il contenitore si adatti naturalmente
-                setTimeout(() => {
-                    faqGrid.style.height = '';
                     
-                    // Dopo che l'altezza è stata aggiustata, mantieni la posizione di scorrimento relativa
-                    // solo se l'utente non ha già scorso manualmente
-                    if (Math.abs(window.scrollY - scrollPosition) < 10) { // Tolleranza di 10px
-                        window.scrollTo({
-                            top: faqGridTop + scrollRelativeToFaq,
-                            behavior: 'auto' // Importante: non usare 'smooth' qui per evitare ulteriori saltelli
+                    const shouldBeVisible = category === 'all' || item.dataset.category === category;
+                    
+                    // Manteniamo in DOM tutti gli elementi ma con opacità 0 quelli da nascondere
+                    if (!shouldBeVisible) {
+                        const fadeOutPromise = new Promise(resolve => {
+                            item.style.opacity = '0';
+                            setTimeout(resolve, 150); // Metà del tempo di transizione per un effetto più veloce
                         });
+                        fadeOutPromises.push(fadeOutPromise);
                     }
-                }, 50);
+                });
+                
+                // 4. Attendiamo il completamento del fade out prima di procedere
+                Promise.all(fadeOutPromises)
+                    .then(() => {
+                        // 5. Fase 2: Nascondiamo fisicamente gli elementi non necessari e riportiamo a 1 l'opacità degli altri
+                        allFaqItems.forEach(item => {
+                            const shouldBeVisible = category === 'all' || item.dataset.category === category;
+                            
+                            if (shouldBeVisible) {
+                                item.style.display = 'flex';
+                                item.style.position = 'relative';
+                                item.style.zIndex = '1';
+                                // Riportiamo l'opacità a 1 dopo averli mostrati
+                                // Facciamo una transizione asincrona per dare tempo al browser di processare il display change
+                                setTimeout(() => {
+                                    item.style.opacity = '1';
+                                }, 10);
+                            } else {
+                                // Nascondiamo fisicamente gli elementi non necessari
+                                item.style.display = 'none';
+                                item.style.position = 'absolute';
+                                item.style.zIndex = '-1';
+                            }
+                        });
+                        
+                        // 6. Calcoliamo la nuova altezza precisa con una transizione fluida
+                        setTimeout(() => {
+                            // Rilasciamo l'altezza con una transizione fluida
+                            faqGrid.style.transition = 'height 0.3s ease-in-out';
+                            faqGrid.style.height = '';
+                            
+                            // Rimuoviamo la transizione dopo il completamento
+                            setTimeout(() => {
+                                faqGrid.style.transition = '';
+                            }, 350);
+                        }, 50); // Un piccolo ritardo per dare il tempo al browser di processare le modifiche DOM
+                    });
             });
         });
     }
