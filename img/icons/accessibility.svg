@@ -2,19 +2,19 @@
     <!-- Background grid -->
     <path d="M100 100h300M100 180h300M100 260h300M100 340h300M100 100v300M180 100v300M260 100v300M340 100v300" stroke="#3498db" stroke-width="2" stroke-opacity="0.2"/>
 
-    <!-- Main circular outline -->
-    <circle cx="256" cy="256" r="130" fill="none" stroke="#3498db" stroke-width="16"/>
+    <!-- Main circular outline - increased size -->
+    <circle cx="256" cy="256" r="160" fill="none" stroke="#3498db" stroke-width="16"/>
 
-    <!-- Head -->
-    <circle cx="256" cy="180" r="36" fill="#2980b9"/>
+    <!-- Head - scaled up -->
+    <circle cx="256" cy="160" r="42" fill="#2980b9"/>
 
-    <!-- Body -->
-    <path d="M256 216v50" stroke="#2980b9" stroke-width="24" stroke-linecap="round"/>
+    <!-- Body - scaled up -->
+    <path d="M256 202v65" stroke="#2980b9" stroke-width="28" stroke-linecap="round"/>
 
-    <!-- Arms -->
-    <path d="M205 245h102" stroke="#2980b9" stroke-width="24" stroke-linecap="round"/>
+    <!-- Arms - scaled up -->
+    <path d="M186 235h140" stroke="#2980b9" stroke-width="28" stroke-linecap="round"/>
 
-    <!-- Legs - separated into two distinct lines to avoid triangle -->
-    <path d="M256 266l-50 84" stroke="#2980b9" stroke-width="24" stroke-linecap="round"/>
-    <path d="M256 266l50 84" stroke="#2980b9" stroke-width="24" stroke-linecap="round"/>
+    <!-- Legs - scaled up -->
+    <path d="M256 267l-65 110" stroke="#2980b9" stroke-width="28" stroke-linecap="round"/>
+    <path d="M256 267l65 110" stroke="#2980b9" stroke-width="28" stroke-linecap="round"/>
 </svg>
