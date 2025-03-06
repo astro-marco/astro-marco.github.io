@@ -382,6 +382,8 @@ p {
     justify-content: center;
     gap: 10px;
     margin-bottom: 30px;
+    position: relative;
+    z-index: 2; /* Assicura che i pulsanti siano sempre cliccabili */
 }
 
 .faq-category-btn {
@@ -399,10 +401,15 @@ p {
     color: var(--white);
 }
 
+/* Modifico la griglia per avere sempre una colonna singola */
 .faq-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+    transition: height 0.3s ease; /* Aggiunge transizione fluida all'altezza */
+    position: relative; /* Importante per lo positioning dei figli */
 }
 
 .faq-item {
@@ -410,8 +417,15 @@ p {
     padding: 0;
     border-radius: var(--radius-md);
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, transform 0s; /* Evita transizioni sulla trasformazione */
     overflow: hidden;
+    height: auto;
+    contain: content;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transform: translateZ(0); /* Attiva hardware acceleration */
+    will-change: transform, opacity; /* Avvisa il browser di possibili cambiamenti */
 }
 
 .faq-question {
@@ -444,8 +458,9 @@ p {
 .faq-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease;
+    transition: max-height 0.4s ease, padding 0.4s ease;
     padding: 0 24px;
+    flex-grow: 1;
 }
 
 .faq-item.expanded .faq-content {
@@ -454,6 +469,27 @@ p {
 
 .faq-item.expanded {
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Rimuovo la media query specifica per le FAQ visto che ora sono sempre in una colonna */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .faq-category-btn {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
 }
 
 /* Footer */
@@ -611,10 +647,6 @@ footer {
     
     .mobile-menu-btn {
         display: flex;
-    }
-    
-    .faq-grid {
-        grid-template-columns: 1fr;
     }
     
     .faq-category-btn {

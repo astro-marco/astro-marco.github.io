@@ -80,14 +80,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add scroll event for nav highlighting
     window.addEventListener('scroll', highlightNavItem);
     
-    // FAQ accordion functionality - improved version
+    // FAQ accordion functionality - migliorato per risolvere il bug dell'esplosione simultanea
     const faqItems = document.querySelectorAll('.faq-item');
     
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         const content = item.querySelector('.faq-content');
         
-        if (question) {
+        if (question && content) {
             // Set initial state
             content.style.maxHeight = '0px';
             question.setAttribute('aria-expanded', 'false');
@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         otherItem.classList.remove('expanded');
                         otherQuestion.setAttribute('aria-expanded', 'false');
                         otherContent.style.maxHeight = '0px';
+                        otherContent.style.paddingBottom = '0px';
                     }
                 });
                 
@@ -112,19 +113,62 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!isExpanded) {
                     item.classList.add('expanded');
                     question.setAttribute('aria-expanded', 'true');
-                    content.style.maxHeight = content.scrollHeight + 'px';
+                    
+                    // Calcolo preciso dell'altezza necessaria
+                    content.style.display = 'block';
+                    const height = content.scrollHeight;
+                    content.style.maxHeight = height + 'px';
+                    content.style.paddingBottom = '24px';
+                    
+                    // Aggiustamento dopo la transizione per evitare troncamenti
+                    setTimeout(() => {
+                        if (question.getAttribute('aria-expanded') === 'true') {
+                            // Ricalcolo l'altezza una volta che il padding è applicato
+                            content.style.maxHeight = content.scrollHeight + 'px';
+                        }
+                    }, 400); // Stesso tempo della transizione CSS
                 }
             });
         }
     });
     
-    // FAQ category filtering
+    // FAQ category filtering - migliorato per eliminare il "saltello" durante il cambio categoria
     const faqCategoryBtns = document.querySelectorAll('.faq-category-btn');
     const allFaqItems = document.querySelectorAll('.faq-item');
-    
+    const faqGrid = document.querySelector('.faq-grid');
+
     if (faqCategoryBtns.length > 0) {
+        // Funzione per ripristinare completamente una FAQ al suo stato chiuso
+        const resetFaqItem = (item) => {
+            const question = item.querySelector('.faq-question');
+            const content = item.querySelector('.faq-content');
+            
+            if (question && content) {
+                item.classList.remove('expanded');
+                question.setAttribute('aria-expanded', 'false');
+                content.style.maxHeight = '0px';
+                content.style.paddingBottom = '0px';
+                
+                // Assicura che le proprietà siano applicate immediatamente
+                content.style.transition = 'none';
+                void content.offsetWidth; // Forza un reflow
+                content.style.transition = '';
+            }
+        };
+
         faqCategoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                // Salva la posizione di scorrimento corrente e l'altezza del contenitore
+                const scrollPosition = window.scrollY;
+                const faqSectionHeight = faqGrid.offsetHeight;
+                
+                // Salva la posizione di scroll rispetto alla parte superiore della griglia FAQ
+                const faqGridTop = faqGrid.getBoundingClientRect().top + window.scrollY;
+                const scrollRelativeToFaq = scrollPosition - faqGridTop;
+                
+                // Temporaneamente mantieni l'altezza fissa per prevenire il salto
+                faqGrid.style.height = `${faqSectionHeight}px`;
+                
                 // Remove active class from all buttons
                 faqCategoryBtns.forEach(b => b.classList.remove('active'));
                 
@@ -133,24 +177,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const category = btn.dataset.category;
                 
-                // Show/hide FAQ items based on category
+                // Ripristina tutte le FAQ e nascondi tutte
+                allFaqItems.forEach(item => {
+                    resetFaqItem(item);
+                    item.style.display = 'none';
+                });
+                
+                // Show relevant FAQ items
+                let visibleItems = [];
                 allFaqItems.forEach(item => {
                     if (category === 'all' || item.dataset.category === category) {
                         item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                        
-                        // Collapse if expanded
-                        if (item.classList.contains('expanded')) {
-                            const question = item.querySelector('.faq-question');
-                            const content = item.querySelector('.faq-content');
-                            
-                            item.classList.remove('expanded');
-                            question.setAttribute('aria-expanded', 'false');
-                            content.style.maxHeight = '0px';
-                        }
+                        visibleItems.push(item);
                     }
                 });
+                
+                // Dopo un breve istante, rimuovi l'altezza fissa
+                // e lascia che il contenitore si adatti naturalmente
+                setTimeout(() => {
+                    faqGrid.style.height = '';
+                    
+                    // Dopo che l'altezza è stata aggiustata, mantieni la posizione di scorrimento relativa
+                    // solo se l'utente non ha già scorso manualmente
+                    if (Math.abs(window.scrollY - scrollPosition) < 10) { // Tolleranza di 10px
+                        window.scrollTo({
+                            top: faqGridTop + scrollRelativeToFaq,
+                            behavior: 'auto' // Importante: non usare 'smooth' qui per evitare ulteriori saltelli
+                        });
+                    }
+                }, 50);
             });
         });
     }
