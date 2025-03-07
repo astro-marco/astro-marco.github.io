@@ -1,0 +1,80 @@
+.use-cases {
+    background-color: var(--light);
+}
+
+.use-cases-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-top: 40px;
+}
+
+.use-case {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.use-case.reversed {
+    flex-direction: row-reverse;
+}
+
+.use-case-content {
+    flex: 1;
+}
+
+.use-case-image {
+    flex: 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Nuovi stili per l'impaginazione dei paragrafi */
+.use-case-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.use-case-content p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--medium);
+    margin-bottom: 20px;
+    max-width: 540px;
+}
+
+.use-case-content ul {
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+.use-case-content li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 5px;
+    color: var(--dark);
+}
+
+.use-case-content li::marker {
+    color: var(--primary-color);
+}
+
+/* Impedisce che su dispositivi mobili l'immagine sia sopra il testo quando si inverte l'ordine */
+@media (max-width: 992px) {
+    .use-case, 
+    .use-case.reversed {
+        flex-direction: column;
+    }
+    
+    .use-case-image {
+        order: -1;
+        margin-bottom: 24px;
+        max-width: 100%;
+    }
+    
+    .use-case-content p {
+        max-width: 100%;
+    }
+}

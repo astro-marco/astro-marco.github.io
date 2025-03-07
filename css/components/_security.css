@@ -1,0 +1,72 @@
+.security {
+    background-color: var(--white);
+    position: relative;
+}
+
+.section-intro {
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--medium);
+    max-width: 680px;
+    margin: -15px auto 40px;
+    line-height: 1.6;
+}
+
+.security-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.security-feature {
+    background-color: var(--light);
+    border-radius: var(--radius-lg);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.security-feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.security-feature h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.security-feature p {
+    color: var(--medium);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* Aggiunge un'icona di sicurezza prima del titolo */
+.security-feature h3::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/icons/shield-check.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: -36px;
+    top: 2px;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .security-feature h3::before {
+        display: none; /* Nascondi l'icona su mobile */
+    }
+    
+    .section-intro {
+        font-size: 1.05rem;
+        margin-bottom: 30px;
+    }
+}
