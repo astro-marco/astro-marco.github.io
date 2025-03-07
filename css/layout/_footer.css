@@ -13,8 +13,10 @@ footer {
     gap: 40px;
 }
 
+/* Fix per la dimensione del logo */
 .footer-logo img {
     height: 40px;
+    width: auto; /* Assicura che l'aspect ratio sia mantenuto */
     margin-bottom: 20px;
 }
 

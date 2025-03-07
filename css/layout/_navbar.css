@@ -17,8 +17,10 @@
     padding: 15px 24px;
 }
 
+/* Fix per la dimensione del logo */
 .logo img {
     height: 40px;
+    width: auto; /* Assicura che l'aspect ratio sia mantenuto */
 }
 
 .nav-links a {
