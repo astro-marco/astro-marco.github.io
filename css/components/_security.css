@@ -51,7 +51,7 @@
     display: inline-block;
     width: 24px;
     height: 24px;
-    background-image: url('../img/icons/shield-check.svg');
+    background-image: url('../../img/icons/shield-check.svg');
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;

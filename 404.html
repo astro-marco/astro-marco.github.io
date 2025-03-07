@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - IgeA</title>
+    <base href="/">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 120px 24px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .error-code {
+            font-size: 6rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .back-home {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="logo">
+                    <a href="/">
+                        <img src="img/igea-logo.svg" alt="IgeA Logo" class="logo-img">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <h1>Page Not Found</h1>
+            <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+            <div class="back-home">
+                <a href="/" class="primary-btn">Go to Homepage</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Simple redirect if the URL contains a hashtag 
+        if (window.location.href.includes('#')) {
+            const hashPart = window.location.href.split('#')[1];
+            window.location.href = '/#' + hashPart;
+        }
+    </script>
+</body>
+</html>
