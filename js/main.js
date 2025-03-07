@@ -315,28 +315,81 @@ document.addEventListener('DOMContentLoaded', function() {
         // Detect operating system
         const userAgent = window.navigator.userAgent;
         let detectedOS = 'free'; // Default text
+        let downloadLink = '#'; // Default link
         
         if (/(Mac|iPhone|iPod|iPad)/i.test(userAgent)) {
             detectedOS = 'macOS';
+            downloadLink = '/downloads/IgeA-1.0.2-mac.dmg'; // Direct download link for macOS
         } else if (/Windows/i.test(userAgent)) {
             detectedOS = 'Windows';
+            downloadLink = '/downloads/IgeA-1.0.2-windows.exe'; // Direct download link for Windows
         } else if (/Android/i.test(userAgent)) {
             detectedOS = 'Android';
+            downloadLink = 'https://play.google.com/store/apps/details?id=com.igea.app'; // Google Play link
         } else if (/Linux/i.test(userAgent)) {
             detectedOS = 'Linux';
+            downloadLink = '/downloads/IgeA-1.0.2-linux.AppImage'; // Direct download link for Linux
         } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
             detectedOS = 'iOS';
+            downloadLink = 'https://apps.apple.com/app/igea/id123456789'; // App Store link
+        } else {
+            // If OS is not detected, link to download page
+            downloadLink = '/download.html';
         }
         
         // Update button text
         downloadBtn.textContent = `Get IgeA for ${detectedOS}`;
         
-        // Update button href to point to specific download if available
-        if (detectedOS !== 'free') {
-            downloadBtn.href = `#download-${detectedOS.toLowerCase()}`;
+        // For the main page, set direct download link
+        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+            downloadBtn.href = downloadLink;
         }
+        // For the download page, add hash to scroll to specific section
+        else if (window.location.pathname === '/download.html') {
+            // Find the download card for the detected OS
+            const osCard = document.querySelector(`.download-card h3:contains('${detectedOS}')`);
+            if (osCard) {
+                // Scroll to the appropriate card
+                osCard.scrollIntoView({behavior: 'smooth'});
+            }
+        }
+    }
+    
+    // Add a contains selector for finding elements with text
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+    }
+    
+    if (window.jQuery === undefined) {
+        // Custom implementation of :contains selector when jQuery is not available
+        HTMLElement.prototype.__defineGetter__(':contains', function(text) {
+            return this.textContent.includes(text);
+        });
     }
     
     // Run the OS detection on page load
     detectOSAndUpdateButton();
+    
+    // Highlight active nav item based on current page
+    function highlightCurrentNavItem() {
+        const currentPath = window.location.pathname;
+        const navItems = document.querySelectorAll('.nav-links a');
+        
+        navItems.forEach(item => {
+            // Remove active class from all items first
+            item.classList.remove('active');
+            
+            const itemHref = item.getAttribute('href');
+            
+            // Check if the href matches the current path
+            if ((itemHref === currentPath) || 
+                (itemHref === '/download.html' && currentPath === '/download.html') ||
+                (currentPath === '/' && itemHref.startsWith('/#'))) {
+                item.classList.add('active');
+            }
+        });
+    }
+    
+    // Run once on load
+    highlightCurrentNavItem();
 });
