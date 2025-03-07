@@ -305,4 +305,38 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Interactive demo coming soon! Please check back later.');
         });
     }
+
+    // Detect OS and update download button text
+    function detectOSAndUpdateButton() {
+        const downloadBtn = document.getElementById('main-download-btn');
+        
+        if (!downloadBtn) return;
+        
+        // Detect operating system
+        const userAgent = window.navigator.userAgent;
+        let detectedOS = 'free'; // Default text
+        
+        if (/(Mac|iPhone|iPod|iPad)/i.test(userAgent)) {
+            detectedOS = 'macOS';
+        } else if (/Windows/i.test(userAgent)) {
+            detectedOS = 'Windows';
+        } else if (/Android/i.test(userAgent)) {
+            detectedOS = 'Android';
+        } else if (/Linux/i.test(userAgent)) {
+            detectedOS = 'Linux';
+        } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+            detectedOS = 'iOS';
+        }
+        
+        // Update button text
+        downloadBtn.textContent = `Get IgeA for ${detectedOS}`;
+        
+        // Update button href to point to specific download if available
+        if (detectedOS !== 'free') {
+            downloadBtn.href = `#download-${detectedOS.toLowerCase()}`;
+        }
+    }
+    
+    // Run the OS detection on page load
+    detectOSAndUpdateButton();
 });
