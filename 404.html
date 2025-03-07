@@ -25,17 +25,19 @@
     </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="navbar-container">
-                <div class="logo">
-                    <a href="/">
-                        <img src="img/igea-logo.svg" alt="IgeA Logo" class="logo-img">
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!-- Carica l'header in modo sincrono -->
+    <div id="header-container">
+        <script>
+            (function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/components/header.html', false);
+                xhr.send();
+                if (xhr.status === 200) {
+                    document.getElementById('header-container').innerHTML = xhr.responseText;
+                }
+            })();
+        </script>
+    </div>
 
     <main>
         <div class="error-container">
@@ -48,6 +50,9 @@
         </div>
     </main>
 
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
     <script>
         // Simple redirect if the URL contains a hashtag 
         if (window.location.href.includes('#')) {
@@ -55,5 +60,7 @@
             window.location.href = '/#' + hashPart;
         }
     </script>
+
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>
