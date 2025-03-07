@@ -1,27 +1,30 @@
 import { select } from '../utils/dom.js';
 
 /**
- * Configura i pulsanti di download
+ * Configura i pulsanti di download per mostrare l'OS corretto
  */
 export function setupDownloadButtons() {
-    const downloadBtn = select('#main-download-btn');
-    if (!downloadBtn) return;
+    // Trova il pulsante principale nella home page
+    const mainDownloadBtn = document.getElementById('main-download-btn');
     
-    // Rileva OS e configura il pulsante di download
-    const osInfo = detectOperatingSystem();
-    updateDownloadButton(downloadBtn, osInfo);
+    if (mainDownloadBtn) {
+        const osInfo = detectOperatingSystem();
+        
+        // Aggiorna testo e href del pulsante
+        mainDownloadBtn.textContent = `Get IgeA for ${osInfo.os}`;
+        mainDownloadBtn.href = osInfo.downloadLink;
+    }
 }
 
 /**
  * Rileva il sistema operativo dell'utente
- * @returns {Object} Informazioni sull'OS rilevato
  */
 function detectOperatingSystem() {
     const userAgent = window.navigator.userAgent;
-    let os = 'free'; // Testo predefinito
-    let downloadLink = '#'; // Link predefinito
+    let os = 'your device'; // Testo predefinito
+    let downloadLink = '/download.html'; // Link predefinito
     
-    if (/(Mac|iPhone|iPod|iPad)/i.test(userAgent)) {
+    if (/(Mac|iPhone|iPod|iPad)/i.test(userAgent) && !/(iPhone|iPod|iPad)/i.test(userAgent)) {
         os = 'macOS';
         downloadLink = '/downloads/IgeA-1.0.2-mac.dmg';
     } else if (/Windows/i.test(userAgent)) {
@@ -33,12 +36,9 @@ function detectOperatingSystem() {
     } else if (/Linux/i.test(userAgent)) {
         os = 'Linux';
         downloadLink = '/downloads/IgeA-1.0.2-linux.AppImage';
-    } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+    } else if (/(iPhone|iPad|iPod)/i.test(userAgent)) {
         os = 'iOS';
         downloadLink = 'https://apps.apple.com/app/igea/id123456789';
-    } else {
-        // Se l'OS non è rilevato, link alla pagina download
-        downloadLink = '/download.html';
     }
     
     return { os, downloadLink };

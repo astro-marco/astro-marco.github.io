@@ -1,47 +1,53 @@
 // Import modules with error handling
-let setupNavigation, setupFAQ, setupDownloadButtons, setupAnimations, setupThemeToggle, setupDemo, highlightCurrentNavItem;
+import { loadComponent } from './utils/component-loader.js';
 
-// Helper function to safely import modules
-async function safeImport() {
-    try {
-        const navigationModule = await import('./modules/navigation.js');
-        setupNavigation = navigationModule.setupNavigation;
-        
-        const faqModule = await import('./modules/faq.js');
-        setupFAQ = faqModule.setupFAQ;
-        
-        const downloadModule = await import('./modules/download.js');
-        setupDownloadButtons = downloadModule.setupDownloadButtons;
-        
-        const animationsModule = await import('./modules/animations.js');
-        setupAnimations = animationsModule.setupAnimations;
-        
-        const themeModule = await import('./modules/theme.js');
-        setupThemeToggle = themeModule.setupThemeToggle;
-        
-        const demoModule = await import('./modules/demo.js');
-        setupDemo = demoModule.setupDemo;
-        
-        const navUtilsModule = await import('./utils/navigation-utils.js');
-        highlightCurrentNavItem = navUtilsModule.highlightCurrentNavItem;
-        
-        // Initialize all modules once loaded
-        initModules();
-    } catch (error) {
-        console.error('Error loading modules:', error);
-        // Basic functionality can still work even if modules fail to load
+/**
+ * Funzione di inizializzazione dei moduli JS in modo efficiente
+ */
+async function initApp() {
+    // 1. Carica i componenti principali (se non sono già stati caricati in modo sincrono)
+    const headerElement = document.querySelector('#header-container');
+    const footerElement = document.querySelector('#footer-container');
+    
+    if (headerElement && !headerElement.innerHTML) {
+        await loadComponent('/components/header.html', headerElement);
+    }
+    
+    if (footerElement && !footerElement.innerHTML) {
+        await loadComponent('/components/footer.html', footerElement);
+    }
+
+    // 2. Carica i moduli di base in modo sincrono
+    import('./modules/navigation.js')
+        .then(module => module.setupNavigation())
+        .catch(err => console.warn('Navigation module failed:', err));
+    
+    // 3. Carica i moduli di download immediatamente per il bottone OS
+    import('./modules/download.js')
+        .then(module => module.setupDownloadButtons())
+        .catch(err => console.warn('Download module failed:', err));
+
+    // 4. Carica i moduli meno critici quando il browser è inattivo
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => loadNonCriticalModules());
+    } else {
+        setTimeout(loadNonCriticalModules, 1000);
     }
 }
 
-function initModules() {
-    if (setupNavigation) setupNavigation();
-    if (setupFAQ) setupFAQ();
-    if (setupDownloadButtons) setupDownloadButtons();
-    if (setupAnimations) setupAnimations();
-    if (setupThemeToggle) setupThemeToggle();
-    if (setupDemo) setupDemo();
-    if (highlightCurrentNavItem) highlightCurrentNavItem();
+/**
+ * Carica moduli non critici
+ */
+function loadNonCriticalModules() {
+    Promise.all([
+        import('./modules/faq.js').then(m => m.setupFAQ && m.setupFAQ()),
+        import('./modules/animations.js').then(m => m.setupAnimations && m.setupAnimations())
+    ]).catch(err => console.warn('Some modules failed to load:', err));
 }
 
-// Quando il DOM è caricato, carica i moduli in modo sicuro
-document.addEventListener('DOMContentLoaded', safeImport);
+// Avvia app quando il DOM è caricato
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
