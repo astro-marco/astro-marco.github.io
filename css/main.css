@@ -22,3 +22,4 @@
 
 /* Utilities */
 @import './utils/_responsive.css';
+@import './utils/_component-placeholders.css';

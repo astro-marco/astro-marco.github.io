@@ -5,25 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IgeA - Home</title>
     <base href="/">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    <!-- Importa il component loader -->
-    <script type="module">
-        import { componentLoader } from '/js/utils/component-loader.js';
-        window.componentLoader = componentLoader;
-        
-        // Per compatibilità con codice esistente
-        function loadComponentSync(path, targetId) {
-            document.write(window.componentLoader 
-                ? window.componentLoader.loadSync(path, targetId)
-                : `<div id="${targetId}"><p>Component loading not available.</p></div>`);
+    
+    <!-- Critical CSS inline per rendering immediato -->
+    <style>
+        /* CSS minimo necessario per la visualizzazione above-the-fold */
+        :root {
+            --primary-color: #3498db;
+            --dark: #2c3e50;
+            --medium: #7f8c8d;
+            --light: #ecf0f1;
+            --white: #ffffff;
+            --radius-md: 8px;
         }
-        window.loadComponentSync = loadComponentSync;
-    </script>
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; background-color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; }
+        .navbar-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 15px 24px; }
+        .logo img { height: 40px; width: auto; }
+        .nav-links a { margin-left: 24px; color: var(--dark); font-weight: 500; text-decoration: none; }
+        .hero { padding-top: 120px; background: linear-gradient(to bottom, var(--light), var(--white)); }
+        .primary-btn { display: inline-block; padding: 10px 20px; background-color: var(--primary-color); color: var(--white); font-weight: 600; border-radius: var(--radius-md); text-decoration: none; }
+    </style>
+    
+    <!-- Preload di risorse critiche -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="js/utils/component-loader.js" as="script">
+    <link rel="preload" href="img/igea-logo.svg" as="image" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Caricamento CSS non-bloccante -->
+    <link rel="stylesheet" href="css/main.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
+    
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
 <body>
-    <!-- Segnaposto per l'header -->
-    <div id="header-container"></div>
+    <!-- Header inline critico (precedentemente caricato in modo sincrono) -->
+    <header id="header-container">
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="logo">
+                    <a href="/">
+                        <img src="img/igea-logo.svg" alt="IgeA Logo" width="40" height="40">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#use-cases">Use Cases</a>
+                    <a href="#security">Security</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="/download.html" class="download-btn">Download</a>
+                </div>
+                <div class="mobile-menu-btn">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
     
     <!-- Contenuto principale -->
     <main>
@@ -252,7 +289,61 @@
     </main>
     
     <!-- Segnaposto per il footer -->
-    <div id="footer-container"></div>
+    <div id="footer-container" style="min-height: 300px; background-color: var(--dark);"></div>
+
+    <!-- Inizializzazione componenti -->
+    <script type="module">
+        import { componentLoader } from '/js/utils/async-component-loader.js';
+        
+        // Migliora l'header esistente in modo asincrono
+        componentLoader.load('/components/header.html', document.getElementById('header-container'), {
+            afterInsert: (el) => {
+                // Evidenzia l'elemento di navigazione corrente
+                const currentPath = window.location.pathname;
+                const navLinks = el.querySelectorAll('.nav-links a');
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === currentPath || 
+                       (currentPath === '/' && link.getAttribute('href') === '#features')) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+        
+        // Carica il footer con gestione esplicita degli errori
+        console.log('Tentativo di caricamento del footer...');
+        const footerContainer = document.getElementById('footer-container');
+        
+        componentLoader.load('/components/footer.html', footerContainer)
+            .then(() => {
+                console.log('Footer caricato con successo!');
+                // Assicurati che sia visibile
+                footerContainer.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Errore durante il caricamento del footer:', error);
+                // Fallback diretto se c'è un errore
+                footerContainer.innerHTML = `
+                    <footer>
+                        <div class="footer-container">
+                            <div class="footer-logo">
+                                <img src="img/igea-logo-white.svg" alt="IgeA Logo" width="40" height="40">
+                            </div>
+                            <div class="footer-links">
+                                <div class="footer-section">
+                                    <h4>Product</h4>
+                                    <a href="/#features">Features</a>
+                                    <a href="/download.html">Download</a>
+                                </div>
+                            </div>
+                            <div class="footer-bottom">
+                                <p>&copy; 2025 IgeA</p>
+                            </div>
+                        </div>
+                    </footer>
+                `;
+            });
+    </script>
 
     <script src="js/main.js" type="module"></script>
 </body>
