@@ -221,6 +221,13 @@ p {
     padding-right: 40px;
 }
 
+.hero-content p {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--medium);
+    margin-bottom: 32px;
+}
+
 .hero-image {
     flex: 1;
     border-radius: var(--radius-lg);
@@ -636,6 +643,10 @@ footer {
         justify-content: center;
     }
     
+    .hero-content p {
+        font-size: 1.15rem;
+    }
+    
     .use-case, 
     .use-case.reversed {
         flex-direction: column;
@@ -694,6 +705,10 @@ footer {
     .primary-btn, .secondary-btn {
         width: auto;
         min-width: 140px;
+    }
+    
+    .hero-content p {
+        font-size: 1.05rem;
     }
     
     .download-options {
