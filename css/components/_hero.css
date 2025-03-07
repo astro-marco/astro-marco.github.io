@@ -1,0 +1,31 @@
+.hero {
+    padding-top: 120px;
+    background: linear-gradient(to bottom, var(--light), var(--white));
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+}
+
+.hero-content {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--medium);
+    margin-bottom: 32px;
+}
+
+.hero-image {
+    flex: 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}

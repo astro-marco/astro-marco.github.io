@@ -1,0 +1,22 @@
+/* File principale che importa tutti i moduli CSS */
+
+/* Base */
+@import 'base/_variables.css';
+@import 'base/_reset.css';
+@import 'base/_typography.css';
+
+/* Componenti */
+@import 'components/_buttons.css';
+@import 'components/_hero.css';
+@import 'components/_features.css';
+@import 'components/_faq.css';
+
+/* Layout */
+@import 'layout/_navbar.css';
+@import 'layout/_footer.css';
+
+/* Pagine specifiche */
+@import 'pages/_download.css';
+
+/* Utilities */
+@import 'utils/_responsive.css';

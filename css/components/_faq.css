@@ -1,0 +1,99 @@
+.faq {
+    background-color: var(--light);
+}
+
+.faq-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 10;
+}
+
+.faq-category-btn {
+    padding: 8px 16px;
+    background-color: var(--white);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-md);
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faq-category-btn.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.faq-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+    transition: height 0.3s ease-in-out;
+    position: relative;
+    min-height: 100px;
+    will-change: height;
+    overflow: visible;
+}
+
+.faq-item {
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    will-change: transform, opacity, max-height;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.faq-question {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    padding: 24px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    outline: none;
+    font-weight: 700;
+}
+
+.faq-question::after {
+    content: '+';
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.expanded .faq-question::after {
+    transform: rotate(45deg);
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+    padding: 0 24px;
+    flex-grow: 1;
+}
+
+.faq-item.expanded .faq-content {
+    padding-bottom: 24px;
+}
+
+.faq-item.expanded {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
