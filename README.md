@@ -7,8 +7,11 @@ Modern website for the IgeA health data management application.
 The website is built using a component-based architecture with vanilla HTML, CSS, and JavaScript for optimal performance:
 
 - **Components**: Reusable UI elements stored in `/components/`
-- **Component Loader**: Asynchronous loading with performance optimization in `js/utils/async-component-loader.js`
+- **Dual Component Loaders**:
+  - Primary loader: `js/utils/async-component-loader.js` for optimized asynchronous loading
+  - Secondary loader: `js/utils/component-loader.js` for backward compatibility
 - **Module Splitting**: Critical modules loaded first, non-critical modules loaded during browser idle time
+- **Responsive Design**: Adaptive layouts for all device sizes via media queries
 
 ## Performance Optimizations
 
@@ -16,9 +19,18 @@ The website is built using a component-based architecture with vanilla HTML, CSS
 - **Asynchronous Loading**: Non-critical components load asynchronously to avoid render blocking
 - **Critical CSS Inlining**: Core styles embedded directly in HTML for fastest rendering
 - **Critical Path Rendering**: Core layout loads first, non-critical components load later
-- **Placeholder Dimensions**: Pre-sized placeholders to avoid layout shifts
+- **Placeholder System**: Dynamic placeholders with animations to prevent layout shifts during loading
 - **Progressive Enhancement**: Basic functionality works even if scripts fail to load
 - **Prioritized Resource Loading**: Critical resources are loaded first, others during idle time
+- **Intersection Observer**: Components and images load only when they come into viewport
+
+## CSS Organization
+
+- **Base**: Variables, reset, and typography fundamentals
+- **Components**: Isolated component styles (buttons, hero, features, etc.)
+- **Layout**: Structural elements like navbar and footer
+- **Pages**: Page-specific styles
+- **Utils**: Helper classes and utilities including responsive breakpoints
 
 ## Development
 
@@ -30,6 +42,8 @@ npm start
 ## Folder Structure
 
 - `/components/` - Reusable HTML components
-- `/css/` - Styles organized by component and function
+- `/css/` - Modular styles organized by functionality
 - `/js/` - JavaScript modules and utilities
-- `/img/` - Image assets
+  - `/js/modules/` - Feature-specific code (navigation, faq, etc.)
+  - `/js/utils/` - Utility functions and component loaders
+- `/img/` - Image assets and icons
