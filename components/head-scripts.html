@@ -1,0 +1,55 @@
+<!-- Caricatore componenti UI -->
+<script type="module">
+  import { componentLoader } from '/js/utils/component-loader.js';
+  
+  // Esponi il componentLoader globalmente per compatibilità
+  window.componentLoader = componentLoader;
+  
+  // Funzione di inizializzazione componenti
+  async function initComponents() {
+    try {
+      // Carica componenti comuni in modo asincrono 
+      if (document.getElementById('header-container')) {
+        componentLoader.load('/components/header.html', '#header-container', {
+          afterInsert: (el) => {
+            // Evidenzia l'elemento di navigazione corrente
+            const currentPath = window.location.pathname;
+            const navLinks = el.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === currentPath || 
+                 (currentPath === '/' && link.getAttribute('href') === '/index.html')) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+      
+      if (document.getElementById('footer-container')) {
+        componentLoader.load('/components/footer.html', '#footer-container');
+      }
+    } catch (error) {
+      console.error("Failed to initialize components:", error);
+    }
+  }
+  
+  // Avvia il caricamento dei componenti quando il DOM è pronto
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initComponents);
+  } else {
+    initComponents();
+  }
+  
+  // Precarica componenti comuni
+  componentLoader.preload('/components/header.html');
+  componentLoader.preload('/components/footer.html');
+</script>
+
+<!-- Per compatibilità con codice esistente che usa loadComponentSync -->
+<script>
+  function loadComponentSync(path, targetId) {
+    document.write(window.componentLoader 
+      ? window.componentLoader.loadSync(path, targetId)
+      : `<div id="${targetId}"><p>Component loading not available.</p></div>`);
+  }
+</script>

@@ -8,21 +8,23 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <meta name="description" content="Download IgeA - Intelligent software for managing, aggregating and analyzing personal medical data">
+    <!-- Importa il component loader -->
+    <script type="module">
+        import { componentLoader } from '/js/utils/component-loader.js';
+        window.componentLoader = componentLoader;
+        
+        // Per compatibilità con codice esistente
+        function loadComponentSync(path, targetId) {
+            document.write(window.componentLoader 
+                ? window.componentLoader.loadSync(path, targetId)
+                : `<div id="${targetId}"><p>Component loading not available.</p></div>`);
+        }
+        window.loadComponentSync = loadComponentSync;
+    </script>
 </head>
 <body class="obsidian-style download-page">
-    <!-- Carica l'header in modo sincrono -->
-    <div id="header-container">
-        <script>
-            (function() {
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', '/components/header.html', false);
-                xhr.send();
-                if (xhr.status === 200) {
-                    document.getElementById('header-container').innerHTML = xhr.responseText;
-                }
-            })();
-        </script>
-    </div>
+    <!-- Carica l'header in modo asincrono -->
+    <div id="header-container"></div>
 
     <main>
         <div class="obsidian-container">
